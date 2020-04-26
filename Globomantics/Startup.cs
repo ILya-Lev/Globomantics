@@ -27,6 +27,7 @@ namespace Globomantics
             services.AddTransient<IRateService, RateService>();
 
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
 
             services.AddDistributedMemoryCache();
 

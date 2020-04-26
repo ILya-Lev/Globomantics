@@ -12,23 +12,7 @@
 
             @foreach (var cd in Model.CDRates)
             {
-                <div class="meter">
-                    <p>@cd.Title</p>
-                    <div class="progress">
-                        @if (cd.TermLength == CDTermLength.Months12)
-                        {
-                            <div class="progress-bar bg-info" style="width: 50%">@cd.Value%</div>
-                        }
-                        else if (cd.TermLength == CDTermLength.Months18)
-                        {
-                            <div class="progress-bar bg-info" style="width: 75%">@cd.Value%</div>
-                        }
-                        else if (cd.TermLength == CDTermLength.Months24)
-                        {
-                            <div class="progress-bar bg-info" style="width: 100%">@cd.Value%</div>
-                        }
-                    </div>
-                </div>
+                <cdrate title="@cd.Title" term-length="@cd.TermLength" meter-percent="%"></cdrate>
             }
         </div>
         <div class="col-md-4">
