@@ -1,12 +1,7 @@
 ﻿@model AutoQuote
 
 @section Banner {
-    <div class="jumbotron jumbotron-fluid jumbotron-green">
-        <div class="container">
-            <h1 class="display-4">Auto Insurance</h1>
-            <p class="lead">With accident forgiveness and the lowest rates around, your checking account is as safe as you.</p>
-        </div>
-    </div>
+    <banner title="Auto Insurance" sub-title="With accident forgiveness and the lowest rates around, your checking account is as safe as you." background-color="green"></banner>
 }
 
 @section SideNav {
@@ -14,7 +9,7 @@
 }
 
 <p>After you complete this form you should receive an email with your quote shortly after. Please allow up to 1 hour to receive your quote.</p>
-    <hr class="featurette-divider-thin">
+<hr class="featurette-divider-thin">
 <form asp-controller="Auto" asp-action="Index">
     <div class="form-group">
         <label asp-for="Make">Vehicle Make</label>
