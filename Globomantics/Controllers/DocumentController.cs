@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Globomantics.Services;
 using Microsoft.AspNetCore.Mvc;
-using Globomantics.Models;
-using Globomantics.Services;
-using System.Text;
 using System.IO;
+using System.Text;
 
 namespace Globomantics.Controllers
 {
@@ -45,7 +39,7 @@ namespace Globomantics.Controllers
 
             return new FileContentResult(
                 Encoding.ASCII.GetBytes(stringWriter.ToString()), "text/csv")
-                { FileDownloadName = "CDRates.csv" };
+            { FileDownloadName = "CDRates.csv" };
         }
 
         public IActionResult GetMortgageRates()

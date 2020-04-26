@@ -1,4 +1,5 @@
-﻿using Globomantics.Services;
+﻿using Globomantics.Filters;
+using Globomantics.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +27,10 @@ namespace Globomantics
             services.AddTransient<IFeatureService, FeatureService>();
             services.AddTransient<IRateService, RateService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<ModelValidationFilter>();
+            });
             services.AddHttpContextAccessor();
 
             services.AddDistributedMemoryCache();
