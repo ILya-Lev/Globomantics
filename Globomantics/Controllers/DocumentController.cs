@@ -1,10 +1,12 @@
-﻿using Globomantics.Services;
+﻿using Globomantics.Filters;
+using Globomantics.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Text;
 
 namespace Globomantics.Controllers
 {
+    [TypeFilter(typeof(FeatureAuthFilter), Arguments = new object[] { FeatureAuthFilter.ResourcesFeatureName })]
     public class DocumentController : Controller
     {
         private IRateService rateService;

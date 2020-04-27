@@ -1,23 +1,23 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 
 namespace Globomantics.Services
 {
     public class FeatureService : IFeatureService
     {
-        private Dictionary<string, bool> featureStates = new Dictionary<string, bool>()
+        private readonly Dictionary<string, bool> _featureStates;
+
+        public FeatureService(string webRootPath)
         {
-            { "Quotes", true },
-            { "Loans", true },
-            { "Resources", true },
-            { "BusinessServices", true}
-        };
+            var file = Path.Combine(webRootPath, "features.json");
+
+            _featureStates = JsonConvert.DeserializeObject<Dictionary<string, bool>>(File.ReadAllText(file));
+        }
 
         public bool IsFeatureActive(string featureName)
         {
-            return featureStates.FirstOrDefault(x => x.Key == featureName).Value;
+            return _featureStates.TryGetValue(featureName, out var isEnabled) && isEnabled;
         }
     }
 }

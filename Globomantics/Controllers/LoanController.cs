@@ -1,10 +1,12 @@
-﻿using Globomantics.Models;
+﻿using Globomantics.Filters;
+using Globomantics.Models;
 using Globomantics.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace Globomantics.Controllers
 {
+    [TypeFilter(typeof(FeatureAuthFilter), Arguments = new object[] { FeatureAuthFilter.LoanFeatureName })]
     public class LoanController : Controller
     {
         private ILoanService loanService;

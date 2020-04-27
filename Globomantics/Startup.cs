@@ -4,14 +4,18 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Globomantics
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _env = env;
             Configuration = configuration;
         }
 
@@ -24,7 +28,7 @@ namespace Globomantics
 
             services.AddSingleton<ILoanService, LoanService>();
             services.AddTransient<IQuoteService, QuoteService>();
-            services.AddTransient<IFeatureService, FeatureService>();
+            services.AddTransient<IFeatureService, FeatureService>(sp => new FeatureService(_env.WebRootPath));
             services.AddTransient<IRateService, RateService>();
 
             services.AddControllersWithViews(options =>
@@ -52,7 +56,7 @@ namespace Globomantics
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
