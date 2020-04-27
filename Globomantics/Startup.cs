@@ -31,10 +31,7 @@ namespace Globomantics
             services.AddTransient<IFeatureService, FeatureService>(sp => new FeatureService(_env.WebRootPath));
             services.AddTransient<IRateService, RateService>();
 
-            services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add<ModelValidationFilter>();
-            });
+            services.AddControllersWithViews(options => { options.Filters.Add<ModelValidationFilter>(); });
             services.AddHttpContextAccessor();
 
             services.AddDistributedMemoryCache();
